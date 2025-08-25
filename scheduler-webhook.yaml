@@ -1,0 +1,2 @@
+enabled: true
+cors: false  # Enable CORS if needed for cross-origin requests

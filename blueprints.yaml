@@ -1,0 +1,64 @@
+name: Scheduler Webhook
+slug: scheduler-webhook
+type: plugin
+version: 1.0.0
+description: Provides webhook and health check endpoints for Grav's Modern Scheduler
+icon: plug
+author:
+  name: Team Grav
+  email: devs@getgrav.org
+  url: http://getgrav.org
+keywords: grav, plugin, scheduler, webhook, api, cron
+bugs: https://github.com/getgrav/grav-plugin-scheduler-webhook/issues
+docs: https://github.com/getgrav/grav-plugin-scheduler-webhook/blob/main/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.7.0' }
+
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+        
+    cors:
+      type: toggle
+      label: Enable CORS
+      help: Allow cross-origin requests to webhook endpoints
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+        
+    info:
+      type: display
+      label: Information
+      content: |
+        <div class="alert alert-info">
+          <h4>Requirements:</h4>
+          <ul>
+            <li>Modern Scheduler must be enabled in Scheduler configuration</li>
+            <li>Webhook token should be configured for security</li>
+          </ul>
+          
+          <h4>Available Endpoints:</h4>
+          <ul>
+            <li><code>/scheduler/webhook</code> - Trigger scheduler via POST request</li>
+            <li><code>/scheduler/health</code> - Check scheduler health via GET request</li>
+          </ul>
+          
+          <p><a href="?task=config&action=scheduler" class="button">Configure Scheduler</a></p>
+        </div>
+      markdown: false
