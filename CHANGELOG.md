@@ -1,5 +1,5 @@
 # v1.0.0
-## 01/24/2025
+## 08/25/2025
 
 1. [](#new)
     * Initial release of Scheduler Webhook plugin
