@@ -105,7 +105,12 @@ class SchedulerWebhookPlugin extends Plugin
         $configuredToken = $config['webhook']['token'] ?? null;
         $providedToken = $this->getAuthToken();
         
-        if ($configuredToken && $providedToken !== $configuredToken) {
+        if ($configuredToken === null || $configuredToken === '') {
+            $this->sendJsonResponse(['error' => 'Missing authorization token configuration'], 500);
+            return;
+        }
+
+        if ($providedToken === null || !hash_equals($configuredToken, $providedToken)) {
             $this->sendJsonResponse(['error' => 'Invalid authorization token'], 401);
             return;
         }
