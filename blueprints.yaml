@@ -7,7 +7,7 @@ icon: plug
 author:
   name: Team Grav
   email: devs@getgrav.org
-  url: http://getgrav.org
+  url: https://getgrav.org
 keywords: grav, plugin, scheduler, webhook, api, cron
 bugs: https://github.com/getgrav/grav-plugin-scheduler-webhook/issues
 docs: https://github.com/getgrav/grav-plugin-scheduler-webhook/blob/main/README.md
