@@ -1,3 +1,9 @@
+# v1.1.4
+## 09/13/2026
+
+1. [](#improved)
+    * The setup instructions no longer refer to a Modern Scheduler switch that no longer exists, and now say a webhook token is required rather than optional. Thanks @sridharkalaibala [#7](https://github.com/getgrav/grav-plugin-scheduler-webhook/pull/7)
+
 # v1.1.3
 ## 07/09/2026
 
