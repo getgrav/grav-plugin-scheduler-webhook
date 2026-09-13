@@ -52,8 +52,8 @@ form:
         <div class="alert alert-info">
           <h4>Requirements:</h4>
           <ul>
-            <li>Modern Scheduler must be enabled in Scheduler configuration</li>
-            <li>Webhook token should be configured for security</li>
+            <li>Enable the webhook trigger in Scheduler configuration</li>
+            <li>Configure a webhook token before sending requests</li>
           </ul>
           
           <h4>Available Endpoints:</h4>
