@@ -77,7 +77,7 @@ cors: false  # Set to true if you need cross-origin requests
 
 **URL:** `/scheduler/webhook`  
 **Method:** POST  
-**Authentication:** token (optional but recommended)
+**Authentication:** token (required)
 
 The token can be sent three ways, checked in this order:
 
@@ -313,8 +313,12 @@ http {
 ### Webhook Returns 404
 
 - Ensure the plugin is enabled
-- Check that Modern Scheduler is enabled in configuration
 - Clear Grav cache: `bin/grav cache`
+
+### Webhook Returns 403
+
+- `Webhook triggers are disabled`: enable `modern.webhook.enabled` in `user/config/scheduler.yaml`.
+- `Webhook token is not configured`: set a nonempty `modern.webhook.token` in the same file before sending requests.
 
 ### Authentication Failures
 
