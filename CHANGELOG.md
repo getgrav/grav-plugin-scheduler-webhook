@@ -1,3 +1,9 @@
+# v1.1.5
+## 10/20/2026
+
+1. [](#new)
+    * The webhook takes an optional `?mode=due`, `overdue` or `all` to pick which jobs a call runs. With Grav 2.2.12 or newer the default catches up on jobs that missed their time, and the README now describes that and the current health check statuses [#9](https://github.com/getgrav/grav-plugin-scheduler-webhook/issues/9)
+
 # v1.1.4
 ## 09/13/2026
 
