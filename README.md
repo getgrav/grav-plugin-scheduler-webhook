@@ -100,11 +100,19 @@ Response:
 ```json
 {
   "success": true,
-  "message": "Scheduler executed",
+  "message": "Scheduler executed (due and missed jobs)",
+  "mode": "overdue",
   "jobs_run": 3,
   "timestamp": "2025-01-24T10:30:00+00:00"
 }
 ```
+
+Each call runs the jobs that are due now plus any job that missed its time since it last ran, so the webhook doesn't have to be called on the exact minute a job is set for. A site pinged every 5, 15 or 60 minutes still runs a job set for `:10` or `02:00` on the next call. A job that is still running from an earlier call isn't started a second time.
+
+Add `?mode=` to change this (requires Grav 2.2.12 or newer):
+- `overdue` (default): due jobs plus jobs that missed their time
+- `due`: only jobs due in the exact minute of the call, the behaviour before Grav 2.2.12
+- `all`: every enabled job, whatever its schedule
 
 #### Trigger Specific Job (Force Run)
 
@@ -155,10 +163,8 @@ Response:
 ```
 
 Status values:
-- `healthy` - Last run within 10 minutes
-- `warning` - Last run within 1 hour
-- `critical` - Last run over 1 hour ago
-- `unknown` - No run history found
+- `healthy` - No job is behind schedule
+- `warning` - At least one job missed its time more than 5 minutes ago and hasn't run since. The `message` says how many. The 5 minutes can be changed with `modern.trigger_grace` (in seconds) in `user/config/scheduler.yaml`
 
 ## Integration Examples
 
@@ -334,7 +340,7 @@ If you get `401 Invalid authorization token`:
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
   ```
 
-### Health Check Shows Critical
+### Health Check Shows Warning
 
 - Check cron/systemd timer is configured
 - Verify scheduler is running: `bin/grav scheduler --run`

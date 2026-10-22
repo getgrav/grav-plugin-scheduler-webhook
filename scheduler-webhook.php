@@ -123,11 +123,17 @@ class SchedulerWebhookPlugin extends Plugin
         
         // Get job ID from query parameters
         $jobId = $_GET['job'] ?? null;
-        
+
+        // ?mode=due|overdue|all. Left out, core decides: it catches up on missed slots, since a
+        // webhook is rarely pinged on the exact minute a job is set for.
+        $mode = isset($_GET['mode']) && is_string($_GET['mode']) && $_GET['mode'] !== '' ? $_GET['mode'] : null;
+
         try {
             // Process webhook trigger via core's modern scheduler when available
             if (method_exists($scheduler, 'processWebhookTrigger')) {
-                $result = $scheduler->processWebhookTrigger($providedToken, $jobId);
+                $result = null === $mode
+                    ? $scheduler->processWebhookTrigger($providedToken, $jobId)
+                    : $scheduler->processWebhookTrigger($providedToken, $jobId, $mode);
             } else {
                 // Fallback for standard scheduler behavior
                 if ($jobId) {
